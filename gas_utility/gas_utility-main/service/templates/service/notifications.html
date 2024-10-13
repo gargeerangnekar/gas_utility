@@ -1,0 +1,92 @@
+<!-- templates/service/notifications.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notifications</title>
+    <style>
+        /* General Styling */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        /* Notifications container styling */
+        .notifications-container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 600px;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        li {
+            background-color: #f9f9f9;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            border-left: 4px solid #007BFF;
+        }
+
+        li:last-child {
+            margin-bottom: 0;
+        }
+
+        p {
+            margin: 0;
+            color: #555;
+        }
+
+        .timestamp {
+            font-size: 12px;
+            color: #999;
+            margin-top: 5px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 600px) {
+            .notifications-container {
+                padding: 20px;
+            }
+
+            li {
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="notifications-container">
+    <h2>Notifications</h2>
+    <ul>
+        {% for notification in notifications %}
+        <li>
+            <p>{{ notification.message }}</p>
+            <div class="timestamp">{{ notification.created_at }}</div>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,138 @@
+<!-- templates/service/request_status.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Service Request Status</title>
+    <style>
+        /* General Styling */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        /* Request status container styling */
+        .status-container {
+            background-color: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 600px;
+        }
+
+        p {
+            font-size: 16px;
+            color: #555;
+        }
+
+        .comments-section {
+            margin-top: 30px;
+        }
+
+        .comments-section h3 {
+            font-size: 18px;
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        .comment {
+            background-color: #f9f9f9;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            border-left: 4px solid #007BFF;
+        }
+
+        .comment:last-child {
+            margin-bottom: 0;
+        }
+
+        .timestamp {
+            font-size: 12px;
+            color: #999;
+            margin-top: 5px;
+        }
+
+        textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        button {
+            padding: 12px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 600px) {
+            .status-container {
+                padding: 20px;
+            }
+
+            .comment {
+                padding: 10px;
+            }
+
+            button {
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="status-container">
+    <h2>Service Request Status</h2>
+    <p><strong>Request Type:</strong> {{ service_request.request_type }}</p>
+    <p><strong>Status:</strong> {{ service_request.status }}</p>
+    <p><strong>Created:</strong> {{ service_request.created_at }}</p>
+    <p><strong>Last Updated:</strong> {{ service_request.updated_at }}</p>
+
+    <div class="comments-section">
+        <h3>Comments</h3>
+        <ul>
+            {% for comment in comments %}
+            <li class="comment">
+                <p>{{ comment.message }}</p>
+                <div class="timestamp">{{ comment.created_at }}</div>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <form method="POST">
+        {% csrf_token %}
+        {{ comment_form.as_p }}
+        <button type="submit">Add Comment</button>
+    </form>
+</div>
+
+</body>
+</html>
